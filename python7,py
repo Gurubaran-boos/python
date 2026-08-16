@@ -1,0 +1,26 @@
+from PIL import Image
+import numpy as np
+
+# Open the image
+img = Image.open("image.jpg").convert("L")
+
+# Convert image to array
+pixels = np.array(img)
+
+# Find minimum and maximum pixel values
+min_val = pixels.min()
+max_val = pixels.max()
+
+# Apply contrast stretching
+stretched = ((pixels - min_val) / (max_val - min_val) * 255).astype(np.uint8)
+
+# Convert back to image
+output = Image.fromarray(stretched)
+
+# Display the image
+output.show()
+
+# Save the image
+output.save("contrast_stretched.jpg")
+
+print("Contrast stretching completed successfully!")
